@@ -1,11 +1,14 @@
 # Replace example.com with your domain, then commit this file to the public
 # repository configured by CADDY_GIT_URL in caddy.bu.
 # The wildcard covers subdomains; example.com also covers the apex domain.
-supernova11.org, *.supernova11.org {
+iansdell.xyz, *.iansdell.xyz {
 	tls {
 		dns cloudflare {env.CF_API_TOKEN}
 	}
-
+    @dock host dock.iansdell.xyz
+    handle @dock {
+            reverse_proxy http://192.168.88.6:3000
+    }
 	# Replace this placeholder response with your site's reverse_proxy or file_server.
 	respond "Caddy is running for {host}" 200
 }
